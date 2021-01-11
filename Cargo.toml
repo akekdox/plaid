@@ -24,6 +24,7 @@ reqwest09 = { version = "0.9", package = "reqwest", optional = true }
 secrecy = "0.7"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
+tokio = { version = "0.2", features = ["full"] }
 
 [dev-dependencies]
 dotenv = "0.15.0"

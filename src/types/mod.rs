@@ -16,6 +16,7 @@ mod account;
 mod auth;
 pub(crate) mod serde_utils;
 mod token;
+pub(crate) mod bank_transfers;
 
 /// A [secure] representation of a [Plaid API secret].
 ///

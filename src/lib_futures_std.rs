@@ -8,6 +8,7 @@ use reqwest::Error as ReqwestError;
 use serde_json::json;
 
 use crate::types::*;
+use crate::bank_transfers::BankResponse;
 
 // TODO: add `Error` type and improve error handling
 // TODO: make `AccessToken` type to differentiate from `PublicToken` etc.
@@ -303,7 +304,32 @@ impl Client {
             .json()
             .await
     }
+
+    /// Bank transfer cancel
+  ///
+  /// [/bank_transfer/cancel]
+  ///
+    pub async fn bank_transfer_cancel(&self, bank_transfer_id: &str) -> Result<BankResponse, ReqwestError> {
+        // TODO: make this strongly typed?
+        let body = json!({
+            "client_id": &self.client_id,
+            "secret": &self.secret,
+            "bank_transfer_id": bank_transfer_id,
+        });
+
+
+        self.client
+            .post(&format!("{}/bank_transfer/cancel", self.url))
+            .json(&body)
+            .send()
+            .await?
+            .error_for_status()?
+            .json()
+            .await
+    }
 }
+
+
 
 #[cfg(test)]
 mod tests {
